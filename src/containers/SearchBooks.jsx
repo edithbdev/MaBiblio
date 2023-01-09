@@ -27,7 +27,6 @@ const SearchBooks = () => {
     const bookToSave = {
       title,
       author,
-      image,
     };
     dispatch(addBook(bookToSave));
     toast.success('Registered book !');
@@ -44,7 +43,7 @@ const SearchBooks = () => {
   ) : (
     state.fetchBooks.map((data) => {
       return (
-        <Card key={data.id}>
+        <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
           <Accordion flush>
             <Accordion.Item eventKey={data.id}>
               <Accordion.Header>{data.volumeInfo.title}</Accordion.Header>
@@ -58,15 +57,18 @@ const SearchBooks = () => {
                 <Card.Text>
                   Description: {data.volumeInfo.description}
                 </Card.Text>
-                <Card.Link 
-                className="btn btn-outline-secondary"
+                <Card.Link
+                  className="btn btn-outline-secondary mx-3"
                   target="_blank"
                   rel="noopener noreferrer"
                   href={data.volumeInfo.previewLink}
                 >
                   More informations
                 </Card.Link>
-                <Button className="ml-3" variant="info" onClick={() => handleSaveBook(data.volumeInfo.title, data.volumeInfo.authors, data.volumeInfo.previewLink)}>
+                <Button
+                  variant="secondary"
+                  type='submit'
+                  onClick={() => handleSaveBook(data.volumeInfo.title, data.volumeInfo.authors, data.volumeInfo.previewLink)}>
                   Save
                 </Button>
               </Accordion.Body>
@@ -78,49 +80,56 @@ const SearchBooks = () => {
   );
 
   return (
-    <main role="main">
-      <div className="jumbotron jumbotron-fluid">
-        <div className="container text-center">
-          <h1 className="display-4">BOOKS</h1>
+    <Container fluid>
+      <Row>
+        <Col className="text-center mt-5">
+          <h1 className="display-4">SEARCH FOR A BOOK</h1>
           <p>
             Indicate the subject of the book to search on Google API</p>
-          <form
-            className="form-inline d-flex justify-content-center"
+        </Col>
+      </Row>
+      <Row>
+        <Col className="d-flex justify-content-center">
+          <Form
+            className="d-flex justify-content-center mt-5"
             onSubmit={handleSubmit}
           >
-            <div className="form-group">
-              <input
+            <Form.Group className="mb-3 mx-3" controlId="formBasicEmail">
+              <Form.Control
                 value={title}
                 type="text"
-                className="form-control"
                 placeholder="what to look for ?"
                 required
                 onChange={(e) => setTitle(e.target.value)}
               />
-            </div>
-            <div className="form-group">
-              <button className="btn btn-outline-secondary ml-4">
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicButton">
+              <Button variant="outline-secondary" type="submit">
                 Search
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className="container" style={{ minHeight: '200px' }}>
-        <div id="accordion">{displayFetchBooks}</div>
-      </div>
+              </Button>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col className="mt-5 mb-5">
+          <Accordion>{displayFetchBooks}</Accordion>
+        </Col>
+      </Row>
       <ToastContainer
         position="bottom-right"
         autoClose={2000}
         hideProgressBar={true}
         newestOnTop={false}
-        closeOnClick
+        closeOnClick={true}
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
       />
-    </main>
+    </Container>
   );
 };
 

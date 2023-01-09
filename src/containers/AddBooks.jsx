@@ -29,10 +29,10 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
       <FlipMove>
         {libraryData.map((data) => {
           return (
-            <Card className="me-auto" key={data.id}>
-              <Card.Body className="d-flex flex-wrap justify-content-between">
-                <Card.Text style={{ width: "50%" }} className=""><strong>Titre : </strong> {data.title}</Card.Text>
-                <Card.Text style={{ width: "40%" }} className=""> <strong>Auteur : </strong> {data.author[0]}</Card.Text>
+            <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
+              <Card.Body className="d-flex justify-content-between">
+                <Card.Text style={{ width: "50%" }} className="mb-0 align-self-center"><strong>Title : </strong> {data.title}</Card.Text>
+                <Card.Text style={{ width: "40%" }} className="mb-0 align-self-center"> <strong>Author : </strong> {data.author[0]}</Card.Text>
                 <Button
                   variant="danger"
                   className="align-self-center"
@@ -45,7 +45,14 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
         })}
       </FlipMove>
     ) : (
-      <Col className="text-center">No data to display</Col>
+      <Button
+        style={{ width: "30%", margin: "auto" }}
+        variant="danger"
+        className="mt-4 mb-5"
+        size="lg"
+      >
+        No data to display
+      </Button>
     );
 
   const deleteAllBooksBtn = libraryData.length > 0 && (
@@ -64,13 +71,12 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
     <Container fluid>
       <Row>
         <Col className="text-center mt-5">
-          <h1 className="display-4">BOOKS</h1>
-          Add a book to your library
+          <h1 className="display-4">Add a book to your library</h1>
         </Col>
       </Row>
       <Form className="d-flex justify-content-center mt-5" onSubmit={handleSubmit}>
-        <Row className="d-flex justify-content-center">
-          <Col xs={12} md={6} className="d-flex justify-content-center">
+        <Row>
+          <Col xs={12} md={4}>
             <Form.Group className="mb-3" controlId="formBasicTitle">
               <Form.Control
                 value={newData.title}
@@ -83,7 +89,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
               />
             </Form.Group>
           </Col>
-          <Col xs={12} md={6} className="d-flex justify-content-center">
+          <Col xs={12} md={4}>
             <Form.Group className="mb-3" controlId="formBasicAuthor">
               <Form.Control
                 value={newData.author}
@@ -96,9 +102,8 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
               />
             </Form.Group>
           </Col>
-          <Col xs={12} md={6} className="d-flex justify-content-center">
+          <Col xs={12} md={4} className="d-flex justify-content-end">
             <Form.Group className="mb-3" controlId="formBasicButton">
-
               <Button variant="outline-secondary" type="submit">
                 Add a book
               </Button>
@@ -106,12 +111,12 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
           </Col>
         </Row>
       </Form>
-      <Row className="">
+      <Row className="mt-5">
         <Col className="text-center">
           <h2>My library</h2>
         </Col>
       </Row>
-      <Row className="mt-5">{displayData}</Row>
+      <Row className="mt-3">{displayData}</Row>
       {deleteAllBooksBtn}
     </Container>
   );

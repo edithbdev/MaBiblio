@@ -10,7 +10,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/MyLibraryBooks-redux">
       <NavBar />
       <Switch>
         <Route exact path="/" component={Homepage} />

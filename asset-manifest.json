@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/MyLibraryBooks-redux/static/css/main.74936a1b.css",
+    "main.css": "/MyLibraryBooks-redux/static/css/main.194be5d4.css",
     "main.js": "/MyLibraryBooks-redux/static/js/main.b5891fd3.js",
     "static/js/787.f5db70bc.chunk.js": "/MyLibraryBooks-redux/static/js/787.f5db70bc.chunk.js",
     "static/media/library.jpg": "/MyLibraryBooks-redux/static/media/library.c4ec665f283ddbe6eac7.jpg",
     "static/media/error.png": "/MyLibraryBooks-redux/static/media/error.9588e93b49e326325d80.png",
     "index.html": "/MyLibraryBooks-redux/index.html",
-    "main.74936a1b.css.map": "/MyLibraryBooks-redux/static/css/main.74936a1b.css.map",
+    "main.194be5d4.css.map": "/MyLibraryBooks-redux/static/css/main.194be5d4.css.map",
     "main.b5891fd3.js.map": "/MyLibraryBooks-redux/static/js/main.b5891fd3.js.map",
     "787.f5db70bc.chunk.js.map": "/MyLibraryBooks-redux/static/js/787.f5db70bc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.74936a1b.css",
+    "static/css/main.194be5d4.css",
     "static/js/main.b5891fd3.js"
   ]
 }

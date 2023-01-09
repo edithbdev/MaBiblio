@@ -25,6 +25,16 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>My Library Books</title>
+  <!-- <meta http-equiv="refresh" content="0; URL=https://edithbdev.github.io/MyLibraryBooks-redux">
+  <link rel="canonical" href="https://edithbdev.github.io/MyLibraryBooks-redux"> -->
+  <script>
+    if (window.location.hostname === "localhost") {
+    } else {
+      if (window.location.hostname === "edithbdev.github.io") {
+        window.location.replace("https://edithbdev.github.io/MyLibraryBooks-redux");
+      } 
+    }
+  </script>
 </head>
 
 <body>

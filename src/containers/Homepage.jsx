@@ -2,7 +2,7 @@ import library from '../images/library.jpg';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const HomeBooks = () => {
+const Homepage = () => {
 
   return (
     <Container fluid>
@@ -31,4 +31,4 @@ const HomeBooks = () => {
   );
 };
 
-export default HomeBooks;
+export default Homepage;

@@ -13,7 +13,7 @@ const Homepage = () => {
       </Row>
       <Row className="d-flex flex-column justify-content-center mt-3">
         <Col className="text-center mb-3">
-          <img src={library} alt="library" />
+          <img src={library} alt="library" className="img-fluid" />
         </Col>
         <Col className="text-center">
           <Button

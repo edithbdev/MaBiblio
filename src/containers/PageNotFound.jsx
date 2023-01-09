@@ -13,7 +13,7 @@ const PageNotFound = () => {
             </Row>
             <Row className="d-flex flex-column justify-content-center mt-3">
                 <Col className="text-center mb-3">
-                    <img src={error} alt="error" />
+                    <img src={error} alt="error" className="img-fluid" />
                 </Col>
                 <Col className="text-center">
                     <Button

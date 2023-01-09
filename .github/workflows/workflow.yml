@@ -12,7 +12,6 @@ jobs:
         node-version: [15.x]
 
     steps:
-    - name: Checkout
     - uses: actions/checkout@v1
 
     - name: Install Packages and build

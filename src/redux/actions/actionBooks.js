@@ -1,15 +1,15 @@
 import { ADD_BOOKS, DELETE_BOOK, DELETE_ALL_BOOKS } from '../constants';
 
-// Action pour l'ajout de livres
-// data : title ou author
+// Action for adding books
+// data : title or author
 export const addBook = (data) => {
   return {
     type: ADD_BOOKS,
-    payload: data /* Objet */,
+    payload: data /* Object */,
   };
 };
 
-// Action pour supprimer un livre
+// Action to delete a book
 export const deleteBook = (id) => {
   return {
     type: DELETE_BOOK,
@@ -17,7 +17,7 @@ export const deleteBook = (id) => {
   };
 };
 
-// Action pour supprimer tous les livres
+// Action to delete all books
 export const deleteAllBooks = () => {
   return {
     type: DELETE_ALL_BOOKS,

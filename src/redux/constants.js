@@ -1,4 +1,4 @@
-// types pour les actions
+// types for actions
 
 // LIBRARY
 export const ADD_BOOKS = 'ADD_BOOKS';

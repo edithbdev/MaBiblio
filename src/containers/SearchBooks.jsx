@@ -2,27 +2,23 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBooks } from '../redux/actions/actionFetchBooks';
 import { addBook } from '../redux/actions/actionBooks';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-// toast.configure();
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Container, Row, Col, Form, Spinner, Card, Accordion, Button } from 'react-bootstrap';
 
 const SearchBooks = () => {
   const [title, setTitle] = useState('');
-  // console.log(title);
 
   const state = useSelector((state) => state.search);
-  const dispatch = useDispatch();
   console.log(state);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(fetchBooks(title));
-    // console.log(title);
   };
 
-  const handleSaveBook = (title, author) => {
+  const handleSaveBook = (title, author, image) => {
     // const bookToSave = {
     //   title: title,
     //   author: author,
@@ -31,70 +27,52 @@ const SearchBooks = () => {
     const bookToSave = {
       title,
       author,
+      image,
     };
     dispatch(addBook(bookToSave));
-    toast.success('Livre enregistré !');
+    toast.success('Registered book !');
   };
 
   const displayFetchBooks = state.isLoading ? (
-    <div className="d-flex justify-content-center">
-      <div className="spinner-border text-info" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-    </div>
+    <Col className="d-flex justify-content-center">
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </Col>
   ) : state.error !== '' ? (
-    <p>{state.error}</p>
+    <Col className="d-flex justify-content-center text-danger">{state.error}</Col>
   ) : (
     state.fetchBooks.map((data) => {
       return (
-        <div key={data.id} className="card mb-2">
-          <div className="card-header">
-            <h5 className="mb-0">
-              <button
-                className="btn btn-link collapsed"
-                data-toggle="collapse"
-                data-target={`#${data.id}`}
-                aria-expanded="false"
-              >
-                {data.volumeInfo.title}
-              </button>
-            </h5>
-          </div>
-          <div id={data.id} className="collapse" data-parent="#accordion">
-            <div className="card-body">
-              {data.volumeInfo.hasOwnProperty('imageLinks') && (
-                <img
-                  src={data.volumeInfo.imageLinks.thumbnail}
-                  alt={data.volumeInfo.title}
-                />
-              )}
-              <br />
-              <h4 className="card-title">Titre : {data.volumeInfo.title}</h4>
-              <h5 className="card-title">
-                Auteurs : {data.volumeInfo.authors}
-              </h5>
-              <p className="card-text">
-                Description: {data.volumeInfo.description}
-              </p>
-              <a
+        <Card key={data.id}>
+          <Accordion flush>
+            <Accordion.Item eventKey={data.id}>
+              <Accordion.Header>{data.volumeInfo.title}</Accordion.Header>
+              <Accordion.Body>
+                {data.volumeInfo.hasOwnProperty('imageLinks') && (
+                  <Card.Img style={{ width: 'auto' }} variant="top" src={data.volumeInfo.imageLinks.thumbnail} alt={data.volumeInfo.title} />
+                )}
+                <br />
+                <Card.Title>Title : {data.volumeInfo.title}</Card.Title>
+                <Card.Title>Authors : {data.volumeInfo.authors}</Card.Title>
+                <Card.Text>
+                  Description: {data.volumeInfo.description}
+                </Card.Text>
+                <Card.Link 
                 className="btn btn-outline-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={data.volumeInfo.previewLink}
-              >
-                Plus d'infos
-              </a>
-              <button
-                className="btn btn-outline-secondary ml-3"
-                onClick={() =>
-                  handleSaveBook(data.volumeInfo.title, data.volumeInfo.authors)
-                }
-              >
-                Enregistrer
-              </button>
-            </div>
-          </div>
-        </div>
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={data.volumeInfo.previewLink}
+                >
+                  More informations
+                </Card.Link>
+                <Button className="ml-3" variant="info" onClick={() => handleSaveBook(data.volumeInfo.title, data.volumeInfo.authors, data.volumeInfo.previewLink)}>
+                  Save
+                </Button>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Card>
       );
     })
   );
@@ -104,7 +82,8 @@ const SearchBooks = () => {
       <div className="jumbotron jumbotron-fluid">
         <div className="container text-center">
           <h1 className="display-4">BOOKS</h1>
-          <p>Indiquer le sujuet du livre à rechercher sur Google API</p>
+          <p>
+            Indicate the subject of the book to search on Google API</p>
           <form
             className="form-inline d-flex justify-content-center"
             onSubmit={handleSubmit}
@@ -114,14 +93,14 @@ const SearchBooks = () => {
                 value={title}
                 type="text"
                 className="form-control"
-                placeholder="Quoi rechercher ?"
+                placeholder="what to look for ?"
                 required
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
             <div className="form-group">
               <button className="btn btn-outline-secondary ml-4">
-                Rechercher
+                Search
               </button>
             </div>
           </form>

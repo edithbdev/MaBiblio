@@ -6,29 +6,22 @@ import {
   deleteAllBooks,
 } from '../redux/actions/actionBooks';
 import FlipMove from 'react-flip-move';
+import { Button, Card, Col, Container, Row, Form } from 'react-bootstrap';
 
-// props destructuring
 const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
-  console.log(libraryData);
 
-  // valeur initiale
   const initialState = {
     title: '',
     author: '',
   };
 
-  // variable d'état
   const [newData, setNewData] = useState(initialState);
 
-  // on valide le formulaire et on passe la methode dans onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    // on invoque addBook et on lui passe comme param newData
     addBook(newData);
 
-    //vider le input
     setNewData(initialState);
-    // console.log(newData);
   };
 
   const displayData =
@@ -36,111 +29,104 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
       <FlipMove>
         {libraryData.map((data) => {
           return (
-            <li
-              key={data.id}
-              className="list-group-item list-group-item-light d-flex justify-content-between"
-            >
-              <span>
-                <strong>Titre:</strong>
-                {data.title}
-              </span>
-              <span>
-                <strong>Auteur:</strong>
-                {data.author}
-              </span>
-              <span
-                className="btn btn-danger"
-                onClick={() => deleteBook(data.id)}
-              >
-                x
-              </span>
-            </li>
+            <Card className="me-auto" key={data.id}>
+              <Card.Body className="d-flex flex-wrap justify-content-between">
+                <Card.Text style={{ width: "50%" }} className=""><strong>Titre : </strong> {data.title}</Card.Text>
+                <Card.Text style={{ width: "40%" }} className=""> <strong>Auteur : </strong> {data.author[0]}</Card.Text>
+                <Button
+                  variant="danger"
+                  className="align-self-center"
+                  onClick={() => deleteBook(data.id)}>
+                  x
+                </Button>
+              </Card.Body>
+            </Card>
           );
         })}
       </FlipMove>
     ) : (
-      <p className="text-center">Aucune data à afficher</p>
+      <Col className="text-center">No data to display</Col>
     );
 
   const deleteAllBooksBtn = libraryData.length > 0 && (
-    <div className="d-flex justify-content-center">
-      <button
-        className="btn btn-danger mt-4 mb-5"
+    <Col className="d-flex justify-content-center">
+      <Button
+        variant='danger'
+        className="mt-4 mb-5"
         onClick={() => deleteAllBooks()}
       >
-        Effacer tous les livres
-      </button>
-    </div>
+        Delete all books
+      </Button>
+    </Col>
   );
 
   return (
-    <main role="main">
-      <div className="jumbotron jumbotron-fluid">
-        <div className="container text-center">
+    <Container fluid>
+      <Row>
+        <Col className="text-center mt-5">
           <h1 className="display-4">BOOKS</h1>
-          <p>Ajouter un livre à votre bibliothèque</p>
-          <form
-            className="form-inline d-flex justify-content-center"
-            onSubmit={handleSubmit}
-          >
-            <div className="form-group">
-              <input
+          Add a book to your library
+        </Col>
+      </Row>
+      <Form className="d-flex justify-content-center mt-5" onSubmit={handleSubmit}>
+        <Row className="d-flex justify-content-center">
+          <Col xs={12} md={6} className="d-flex justify-content-center">
+            <Form.Group className="mb-3" controlId="formBasicTitle">
+              <Form.Control
                 value={newData.title}
                 type="text"
-                className="form-control"
-                placeholder="Titre"
+                placeholder="Title"
                 required
                 onChange={(e) =>
-                  /* je récupère toutes les valeurs de newData (...newData)
-                  et je modifie le title */
                   setNewData({ ...newData, title: e.target.value })
                 }
               />
-            </div>
-            <div className="form-group">
-              <input
+            </Form.Group>
+          </Col>
+          <Col xs={12} md={6} className="d-flex justify-content-center">
+            <Form.Group className="mb-3" controlId="formBasicAuthor">
+              <Form.Control
                 value={newData.author}
                 type="text"
-                className="form-control ml-3"
-                placeholder="Auteur"
+                placeholder="Author"
                 required
                 onChange={(e) =>
                   setNewData({ ...newData, author: e.target.value })
                 }
               />
-            </div>
-            <div className="form-group">
-              <button className="btn btn-outline-secondary ml-4">
-                Ajouter un livre
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className="container" style={{ minHeight: '200px' }}>
-        <div className="row">
-          <div className="col-md-12">
-            <ul className="list-group">{displayData}</ul>
-            {deleteAllBooksBtn}
-          </div>
-        </div>
-      </div>
-    </main>
+            </Form.Group>
+          </Col>
+          <Col xs={12} md={6} className="d-flex justify-content-center">
+            <Form.Group className="mb-3" controlId="formBasicButton">
+
+              <Button variant="outline-secondary" type="submit">
+                Add a book
+              </Button>
+            </Form.Group>
+          </Col>
+        </Row>
+      </Form>
+      <Row className="">
+        <Col className="text-center">
+          <h2>My library</h2>
+        </Col>
+      </Row>
+      <Row className="mt-5">{displayData}</Row>
+      {deleteAllBooksBtn}
+    </Container>
   );
 };
 
-// accèder au state de redux (store)
+// access redux state (store)
 const addStateToProps = (state) => {
   return {
-    // libraryData est ma props que je passe dans AddBooks
     libraryData: state.library,
   };
 };
 
-// accèder au dispatch et récupérer la props addBook
+// access the dispatch and retrieve the addBook props
 const addDispatchToProps = (dispatch) => {
   return {
-    // le param correspond à data (newData)
     addBook: (param) => dispatch(addBook(param)),
     deleteBook: (id) => dispatch(deleteBook(id)),
     deleteAllBooks: () => dispatch(deleteAllBooks()),

@@ -25,16 +25,11 @@ const fetchBooksError = (error) => {
   };
 };
 
-const GOOGLE_API_KEY = 'AIzaSyAWlwG-9AUfPEM5bS8PAmJJPcNp3r70BNE';
-
 export const fetchBooks = (title) => {
   return (dispatch) => {
     dispatch(fetchBooksLoading());
-    // https://console.cloud.google.com/projectselector2/apis/dashboard?supportedpurview=project
-    // https://developers.google.com/books/docs/v1/using
     axios
       .get(
-        // `https://www.googleapis.com/books/v1/volumes?q=${title}&key=${GOOGLE_API_KEY}&maxResults=20`
         `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=20`
       )
       .then((response) => {

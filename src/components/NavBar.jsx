@@ -1,25 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 const NavBar = () => {
+  const location = useLocation();
+  const [url, setUrl] = useState(null);
+
+  useEffect(() => {
+    setUrl(location.pathname);
+  }, [location]);
+
   return (
-    <header>
-      <div className="d-flex flex-column flex-md-row p-3 border-bottom bg-secondary text-white">
-        <h4 className="mr-md-auto">
-          <a href="/" className="text-decoration-none text-white">
-            BOOKS
-          </a>
-        </h4>
-        <nav className="btn-group">
-          <Link to="/" className="btn btn-light">
-            Accueil
-          </Link>
-          <Link to="/search" className="btn btn-light">
-            Rechercher
-          </Link>
-        </nav>
-      </div>
-    </header>
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="/">MY LIBRARY BOOKS</Navbar.Brand>
+        <Nav className="justify-content-end">
+          <Link to="/" className={"navItem" + (url === "/" ? " active" : "")}>Home</Link>
+          <Link to="/myLibrary" className={"navItem" + (url === "/myLibrary" ? " active" : "")}>My library</Link>
+          <Link to="/search" className={"navItem" + (url === "/search" ? " active" : "")}>Search</Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 };
 

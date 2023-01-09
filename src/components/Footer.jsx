@@ -1,12 +1,14 @@
-import React from 'react';
+import Card from 'react-bootstrap/Card';
 
 const Footer = () => {
   return (
-    <footer className="footer text-white bg-secondary mt-5">
-      <div className="container p-3">
-        <span>&copy; EdithGeek</span>
-      </div>
-    </footer>
+    <Card className="text-center fixed-bottom bg-dark">
+      <Card.Footer>
+        <small className="text-muted">
+          &copy; Edithbdev - MY LIBRARY BOOKS
+        </small>
+      </Card.Footer>
+    </Card>
   );
 };
 

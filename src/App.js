@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import AddBooks from './containers/AddBooks';
 import Homepage from './containers/Homepage';
 import SearchBooks from './containers/SearchBooks';
+import PageNotFound from './containers/PageNotFound';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/" component={Homepage} />
         <Route path="/myLibrary" component={AddBooks} />
         <Route path="/search" component={SearchBooks} />
+        <Route path='*' component={PageNotFound} />
       </Switch>
       <Footer />
     </Router>

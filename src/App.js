@@ -14,6 +14,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={Homepage} />
+        <Route path="/MyLibraryBooks-redux" component={Homepage} />
         <Route path="/myLibrary" component={AddBooks} />
         <Route path="/search" component={SearchBooks} />
         <Route path='*' component={PageNotFound} />

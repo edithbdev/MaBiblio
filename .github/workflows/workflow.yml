@@ -1,33 +1,4 @@
-# name: Github Pages deploy
-# on:
-#   push:
-#     branches:
-#       - main
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     strategy:
-#       matrix:
-#         node-version: [15.x]
-
-#     steps:
-#     - uses: actions/checkout@v1
-
-#     - name: Install Packages
-#       run: npm install
-
-#     - name: Build
-#       run: npm run build
-
-#     - name: Deploy to GH Pages
-#       uses: JamesIves/github-pages-deploy-action@releases/v3
-#       with:
-#         GITHUB_TOKEN: ${{ secrets.TOKEN }}
-#         BRANCH: gh-pages
-#         FOLDER: build
-
-name: Deploy to React GitHub Pages
+name: Github Pages deploy
 
 on:
   # Trigger the workflow every time you push to the `main` branch

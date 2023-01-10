@@ -36,11 +36,11 @@ export const fetchBooks = (title) => {
       .then((response) => {
         const bookItemsArray = response.data.items;
         dispatch(fetchBooksSuccess(bookItemsArray));
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         dispatch(fetchBooksError(error.message));
-        console.log(error);
+        // console.log(error);
       });
   };
 };

@@ -59,7 +59,6 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
                   <Card.Text style={{ width: "40%" }} className="mb-0 align-self-center"> <strong>
                     {(Array.isArray(data.author) && data.author.length > 1) ? 'Authors : ' : 'Author'}
                   </strong> {Array.isArray(data.author) ? data.author.join(', ') : data.author}</Card.Text>
-
                   <Button
                     variant="danger"
                     className="align-self-center"

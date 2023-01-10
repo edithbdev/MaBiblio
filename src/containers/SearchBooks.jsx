@@ -69,25 +69,27 @@ const SearchBooks = () => {
                       :
                       <Card.Text>Authors : {data.volumeInfo.authors.join(', ')}</Card.Text>
                   )}
-                  {data.saleInfo.hasOwnProperty('isEbook') && (
-                    data.saleInfo.isEbook && (
-                      <Button
-                        variant="secondary"
-                        className="my-3"
-                        href={data.saleInfo.buyLink}
-                      > E-book available
-                        {data.saleInfo.hasOwnProperty('saleability') && (
-                          data.saleInfo.saleability === 'FREE' ?
-                            <Badge className="mx-1" bg="warning"> Free </Badge>
-                          : <Badge className="mx-1" bg="primary"> Paying </Badge>
-                        )}
-                      </Button>
-                    ))}
                   {data.volumeInfo.hasOwnProperty('description') && (
                     <Card.Text>
                       Description: {data.volumeInfo.description}
                     </Card.Text>
                   )}
+                  {data.saleInfo.hasOwnProperty('isEbook') && (
+                    data.saleInfo.isEbook && (
+                      <Card.Link
+                        className="btn btn-outline-secondary my-3"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={data.saleInfo.buyLink}
+                      >
+                        E-book available
+                        {data.saleInfo.hasOwnProperty('saleability') && (
+                          data.saleInfo.saleability === 'FREE' ?
+                            <Badge className="mx-1" bg="warning"> Free </Badge>
+                            : <Badge className="mx-1" bg="primary"> Paying </Badge>
+                        )}
+                      </Card.Link>
+                    ))}
                   <Card.Link
                     className="btn btn-outline-secondary mx-3 my-3"
                     target="_blank"

@@ -15,8 +15,8 @@ const NavBar = () => {
       <Container fluid>
         <Navbar.Brand href="/">MY LIBRARY BOOKS</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="justify-content-end">
+        <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
+          <Nav>
             <Link to="/" className={"navItem" + (url === "/" ? " active" : "")}>Home</Link>
             <Link to="/myLibrary" className={"navItem" + (url === "/myLibrary" ? " active" : "")}>My library</Link>
             <Link to="/search" className={"navItem" + (url === "/search" ? " active" : "")}>Search</Link>

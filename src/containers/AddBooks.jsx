@@ -5,7 +5,8 @@ import {
   deleteBook,
   deleteAllBooks,
 } from '../redux/actions/actionBooks';
-import FlipMove from 'react-flip-move';
+// import FlipMove from 'react-flip-move';
+// import { Flipper, Flipped } from 'react-flip-toolkit'
 import { Button, Card, Col, Container, Row, Form } from 'react-bootstrap';
 
 const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
@@ -26,32 +27,58 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
 
   const displayData =
     libraryData.length > 0 ? (
-      <FlipMove>
-        {libraryData.map((data) => {
-          return (
-            <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
-              <Card.Body className="d-flex justify-content-between">
-                <Card.Text style={{ width: "50%" }} className="mb-0 align-self-center"><strong>Title : </strong> {data.title}</Card.Text>
-                <Card.Text style={{ width: "40%" }} className="mb-0 align-self-center"> <strong>Author : </strong> {data.author[0]}</Card.Text>
-                <Button
-                  variant="danger"
-                  className="align-self-center"
-                  onClick={() => deleteBook(data.id)}>
-                  x
-                </Button>
-              </Card.Body>
-            </Card>
-          );
-        })}
-      </FlipMove>
+      // <FlipMove>
+      //   {libraryData.map((data) => {
+      //     return (
+      //       <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
+      //         <Card.Body className="d-flex justify-content-between">
+      //           <Card.Text style={{ width: "50%" }} className="mb-0 align-self-center"><strong>Title : </strong> {data.title}</Card.Text>
+      //           <Card.Text style={{ width: "40%" }} className="mb-0 align-self-center"> <strong>Author : </strong> {data.author[0]}</Card.Text>
+      //           <Button
+      //             variant="danger"
+      //             className="align-self-center"
+      //             onClick={() => deleteBook(data.id)}>
+      //             x
+      //           </Button>
+      //         </Card.Body>
+      //       </Card>
+      //     );
+      //   })}
+      // </FlipMove>
+
+      <>
+        {libraryData
+          .sort((a, b) => {
+            return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+          })
+          .map((data) => {
+            return (
+              <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
+                <Card.Body className="d-flex justify-content-between">
+                  <Card.Text style={{ width: "50%" }} className="mb-0 align-self-center"><strong>Title : </strong> {data.title}</Card.Text>
+                  <Card.Text style={{ width: "40%" }} className="mb-0 align-self-center"> <strong>
+                    {(Array.isArray(data.author) && data.author.length > 1) ? 'Authors : ' : 'Author'}
+                  </strong> {Array.isArray(data.author) ? data.author.join(', ') : data.author}</Card.Text>
+
+                  <Button
+                    variant="danger"
+                    className="align-self-center"
+                    onClick={() => deleteBook(data.id)}>
+                    x
+                  </Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+      </>
     ) : (
       <Button
-        style={{ width: "30%", margin: "auto" }}
-        variant="danger"
+        style={{ maxWidth: "50%", margin: "auto" }}
+        variant="warning"
         className="mt-4 mb-5"
-        size="lg"
+        size="md"
       >
-        No data to display
+        You don't have any books in your library
       </Button>
     );
 

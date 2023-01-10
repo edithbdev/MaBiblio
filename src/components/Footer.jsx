@@ -2,12 +2,16 @@ import Card from 'react-bootstrap/Card';
 
 const Footer = () => {
   return (
-    <Card 
-    style={{ borderRadius: 0 }} 
-    className="text-center fixed-bottom bg-dark">
+    <Card
+      style={{ borderRadius: 0 }}
+      className="text-center fixed-bottom bg-dark">
       <Card.Footer>
         <small className="text-muted">
-          &copy; Edithbdev - MY LIBRARY BOOKS
+          MY LIBRARY BOOKS &nbsp;
+          <a href="https://github.com/edithbdev" target="_blank" rel="noreferrer">
+            &copy;  Edithbdev
+          </a>
+
         </small>
       </Card.Footer>
     </Card>

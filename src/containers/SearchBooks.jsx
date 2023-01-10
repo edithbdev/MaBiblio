@@ -10,7 +10,8 @@ const SearchBooks = () => {
   const [title, setTitle] = useState('');
 
   const state = useSelector((state) => state.search);
-  console.log(state);
+  const stateBooks = useSelector((state) => state.library);
+
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -41,42 +42,59 @@ const SearchBooks = () => {
   ) : state.error !== '' ? (
     <Col className="d-flex justify-content-center text-danger">{state.error}</Col>
   ) : (
-    state.fetchBooks.map((data) => {
-      return (
-        <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
-          <Accordion flush>
-            <Accordion.Item eventKey={data.id}>
-              <Accordion.Header>{data.volumeInfo.title}</Accordion.Header>
-              <Accordion.Body>
-                {data.volumeInfo.hasOwnProperty('imageLinks') && (
-                  <Card.Img style={{ width: 'auto' }} variant="top" src={data.volumeInfo.imageLinks.thumbnail} alt={data.volumeInfo.title} />
-                )}
-                <br />
-                <Card.Title>Title : {data.volumeInfo.title}</Card.Title>
-                <Card.Title>Authors : {data.volumeInfo.authors}</Card.Title>
-                <Card.Text>
-                  Description: {data.volumeInfo.description}
-                </Card.Text>
-                <Card.Link
-                  className="btn btn-outline-secondary mx-3"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={data.volumeInfo.previewLink}
-                >
-                  More informations
-                </Card.Link>
-                <Button
-                  variant="secondary"
-                  type='submit'
-                  onClick={() => handleSaveBook(data.volumeInfo.title, data.volumeInfo.authors, data.volumeInfo.previewLink)}>
-                  Save
-                </Button>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </Card>
-      );
-    })
+    state.fetchBooks
+      .sort((a, b) => {
+        return a.volumeInfo.title < b.volumeInfo.title ? -1 : a.volumeInfo.title > b.volumeInfo.title ? 1 : 0;
+      })
+      .map((data) => {
+        return (
+          <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
+            <Accordion flush>
+              <Accordion.Item eventKey={data.id}>
+                <Accordion.Header>{data.volumeInfo.title}</Accordion.Header>
+                <Accordion.Body>
+                  {data.volumeInfo.hasOwnProperty('imageLinks') && (
+                    <Card.Img style={{ width: 'auto', marginBottom: '1rem' }} variant="top" src={data.volumeInfo.imageLinks.thumbnail} alt={data.volumeInfo.title} />
+                  )}
+                  <br />
+                  <Card.Title>Title : {data.volumeInfo.title}</Card.Title>
+                  {
+                    data.volumeInfo.authors.length === 1 ? (
+                      <Card.Title>Author : {data.volumeInfo.authors}</Card.Title>
+                    ) : (
+                      <Card.Title>Authors : {data.volumeInfo.authors.join(', ')}</Card.Title>
+                    )
+                  }
+                  <Card.Text>
+                    Description: {data.volumeInfo.description}
+                  </Card.Text>
+                  <Card.Link
+                    className="btn btn-outline-secondary mx-3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={data.volumeInfo.previewLink}
+                  >
+                    More informations
+                  </Card.Link>
+                  {
+                    !stateBooks.filter((book) => book.title === data.volumeInfo.title).length > 0 ?
+                      <Button
+                        variant="secondary"
+                        type='submit'
+                        onClick={() => handleSaveBook(data.volumeInfo.title, data.volumeInfo.authors)}>
+                        Save
+                      </Button>
+                      :
+                      <Button variant="warning" disabled>
+                        Book registered
+                      </Button>
+                  }
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </Card>
+        );
+      })
   );
 
   return (
@@ -85,7 +103,8 @@ const SearchBooks = () => {
         <Col className="text-center mt-5">
           <h1 className="display-4">SEARCH FOR A BOOK</h1>
           <p>
-            Indicate the subject of the book to search on Google API</p>
+            Indicate the subject of the book to search on Google API and add it to your library
+          </p>
         </Col>
       </Row>
       <Row>
@@ -98,7 +117,7 @@ const SearchBooks = () => {
               <Form.Control
                 value={title}
                 type="text"
-                placeholder="what to look for ?"
+                placeholder="What to look for ?"
                 required
                 onChange={(e) => setTitle(e.target.value)}
               />

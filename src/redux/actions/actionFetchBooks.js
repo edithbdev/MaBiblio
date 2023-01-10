@@ -25,13 +25,13 @@ const fetchBooksError = (error) => {
   };
 };
 
-export const fetchBooks = (title) => {
+export const fetchBooks = (keyword) => {
   return (dispatch) => {
-    dispatch(fetchBooksLoading());
     // https://developers.google.com/books/docs/v1/using
+    dispatch(fetchBooksLoading());
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${title}`
+        `https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=40`
       )
       .then((response) => {
         const bookItemsArray = response.data.items;

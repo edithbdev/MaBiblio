@@ -4,22 +4,23 @@ import { fetchBooks } from '../redux/actions/actionFetchBooks';
 import { addBook } from '../redux/actions/actionBooks';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Container, Row, Col, Form, Spinner, Card, Accordion, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Spinner, Card, Accordion, Button, Badge } from 'react-bootstrap';
 
 const SearchBooks = () => {
-  const [title, setTitle] = useState('');
+  const [keyword, setKeyword] = useState('');
 
-  const state = useSelector((state) => state.search);
+  const stateSearch = useSelector((state) => state.search);
+  console.log(stateSearch)
   const stateBooks = useSelector((state) => state.library);
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchBooks(title));
+    dispatch(fetchBooks(keyword));
   };
 
-  const handleSaveBook = (title, author, image) => {
+  const handleSaveBook = (title, author) => {
     // const bookToSave = {
     //   title: title,
     //   author: author,
@@ -33,16 +34,20 @@ const SearchBooks = () => {
     toast.success('Registered book !');
   };
 
-  const displayFetchBooks = state.isLoading ? (
+  const displayFetchBooks = stateSearch.isLoading ? (
     <Col className="d-flex justify-content-center">
       <Spinner animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
     </Col>
-  ) : state.error !== '' ? (
-    <Col className="d-flex justify-content-center text-danger">{state.error}</Col>
-  ) : (
-    state.fetchBooks
+  ) : stateSearch.fetchBooks === undefined ? (
+    <Col className="d-flex justify-content-center text-danger">
+      No books found
+    </Col>
+  ) : stateSearch.error !== '' ? (
+    <Col className="d-flex justify-content-center text-danger">{stateSearch.error}</Col>
+  ) : (stateSearch.fetchBooks !== undefined && (
+    stateSearch.fetchBooks
       .sort((a, b) => {
         return a.volumeInfo.title < b.volumeInfo.title ? -1 : a.volumeInfo.title > b.volumeInfo.title ? 1 : 0;
       })
@@ -58,18 +63,33 @@ const SearchBooks = () => {
                   )}
                   <br />
                   <Card.Title>Title : {data.volumeInfo.title}</Card.Title>
-                  {
-                    data.volumeInfo.authors.length === 1 ? (
-                      <Card.Title>Author : {data.volumeInfo.authors}</Card.Title>
-                    ) : (
-                      <Card.Title>Authors : {data.volumeInfo.authors.join(', ')}</Card.Title>
-                    )
-                  }
-                  <Card.Text>
-                    Description: {data.volumeInfo.description}
-                  </Card.Text>
+                  {data.volumeInfo.authors && (
+                    data.volumeInfo.authors.length === 1 ?
+                      <Card.Text>Author : {data.volumeInfo.authors}</Card.Text>
+                      :
+                      <Card.Text>Authors : {data.volumeInfo.authors.join(', ')}</Card.Text>
+                  )}
+                  {data.saleInfo.hasOwnProperty('isEbook') && (
+                    data.saleInfo.isEbook && (
+                      <Button
+                        variant="secondary"
+                        className="my-3"
+                        href={data.saleInfo.buyLink}
+                      > E-book disponible
+                        {data.saleInfo.hasOwnProperty('saleability') && (
+                          data.saleInfo.saleability === 'FREE' ?
+                            <Badge className="mx-1" bg="warning"> Free </Badge>
+                          : <Badge className="mx-1" bg="primary"> Paying </Badge>
+                        )}
+                      </Button>
+                    ))}
+                  {data.volumeInfo.hasOwnProperty('description') && (
+                    <Card.Text>
+                      Description: {data.volumeInfo.description}
+                    </Card.Text>
+                  )}
                   <Card.Link
-                    className="btn btn-outline-secondary mx-3"
+                    className="btn btn-outline-secondary mx-3 my-3"
                     target="_blank"
                     rel="noopener noreferrer"
                     href={data.volumeInfo.previewLink}
@@ -95,6 +115,7 @@ const SearchBooks = () => {
           </Card>
         );
       })
+  )
   );
 
   return (
@@ -103,7 +124,7 @@ const SearchBooks = () => {
         <Col className="text-center mt-5">
           <h1 className="display-4">SEARCH FOR A BOOK</h1>
           <p>
-            Indicate the subject of the book to search on Google API and add it to your library
+            Search for a book on the Google API by keyword, and add it to your library!
           </p>
         </Col>
       </Row>
@@ -113,13 +134,12 @@ const SearchBooks = () => {
             className="d-flex justify-content-center mt-5"
             onSubmit={handleSubmit}
           >
-            <Form.Group className="mb-3 mx-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3 mx-3" controlId="formBasicTitle">
               <Form.Control
-                value={title}
+                value={keyword}
                 type="text"
                 placeholder="What to look for ?"
-                required
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => setKeyword(e.target.value)}
               />
             </Form.Group>
 

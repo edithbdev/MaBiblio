@@ -75,7 +75,7 @@ const SearchBooks = () => {
                         variant="secondary"
                         className="my-3"
                         href={data.saleInfo.buyLink}
-                      > E-book disponible
+                      > E-book available
                         {data.saleInfo.hasOwnProperty('saleability') && (
                           data.saleInfo.saleability === 'FREE' ?
                             <Badge className="mx-1" bg="warning"> Free </Badge>

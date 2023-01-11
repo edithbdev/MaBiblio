@@ -15,7 +15,7 @@ const Homepage = () => {
         <Col className="text-center mb-3">
           <img src={library} alt="library" className="img-fluid" />
         </Col>
-        <Col className="text-center">
+        <Col className="text-center mb-5">
           <Button
             variant="outline-secondary"
             size="lg"

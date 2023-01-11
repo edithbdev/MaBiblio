@@ -10,14 +10,19 @@ const SearchBooks = () => {
   const [keyword, setKeyword] = useState('');
 
   const stateSearch = useSelector((state) => state.search);
-  console.log(stateSearch)
+  // console.log(stateSearch)
   const stateBooks = useSelector((state) => state.library);
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (keyword === '') {
+      toast.error('Please enter a keyword');
+      return;
+    }
     dispatch(fetchBooks(keyword));
+   
   };
 
   const handleSaveBook = (title, author) => {
@@ -161,7 +166,7 @@ const SearchBooks = () => {
       </Row>
       <ToastContainer
         position="bottom-right"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={true}
         newestOnTop={false}
         closeOnClick={true}

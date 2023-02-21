@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
+    "nth-check": "^2.1.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
@@ -16,7 +17,7 @@
     "react-flip-toolkit": "^7.0.17",
     "react-redux": "^8.0.5",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.4.2",
@@ -50,9 +51,15 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "@svgr/webpack": "^6.5.1",
+    "gh-pages": "^4.0.0",
+    "react-scripts": "^5.0.1"
   },
   "overrides": {
-    "autoprefixer": "10.4.5"
+    "autoprefixer": "10.4.5",
+    "@svgr/webpack": "^6.5.1"
+  },
+  "resolutions": {
+    "nth-check": "2.1.1"
   }
 }

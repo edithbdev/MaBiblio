@@ -5,8 +5,6 @@ import {
   deleteBook,
   deleteAllBooks,
 } from '../redux/actions/actionBooks';
-// import FlipMove from 'react-flip-move';
-// import { Flipper, Flipped } from 'react-flip-toolkit'
 import { Button, Card, Col, Container, Row, Form } from 'react-bootstrap';
 
 const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
@@ -27,25 +25,6 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
 
   const displayData =
     libraryData.length > 0 ? (
-      // <FlipMove>
-      //   {libraryData.map((data) => {
-      //     return (
-      //       <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
-      //         <Card.Body className="d-flex justify-content-between">
-      //           <Card.Text style={{ width: "50%" }} className="mb-0 align-self-center"><strong>Title : </strong> {data.title}</Card.Text>
-      //           <Card.Text style={{ width: "40%" }} className="mb-0 align-self-center"> <strong>Author : </strong> {data.author[0]}</Card.Text>
-      //           <Button
-      //             variant="danger"
-      //             className="align-self-center"
-      //             onClick={() => deleteBook(data.id)}>
-      //             x
-      //           </Button>
-      //         </Card.Body>
-      //       </Card>
-      //     );
-      //   })}
-      // </FlipMove>
-
       <>
         {libraryData
           .sort((a, b) => {
@@ -55,9 +34,9 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
             return (
               <Card style={{ width: "80%", margin: "auto" }} key={data.id}>
                 <Card.Body className="d-flex justify-content-between">
-                  <Card.Text style={{ width: "50%" }} className="mb-0 align-self-center"><strong>Title : </strong> {data.title}</Card.Text>
+                  <Card.Text style={{ width: "50%" }} className="mb-0 align-self-center"><strong>Titre : </strong> {data.title}</Card.Text>
                   <Card.Text style={{ width: "40%" }} className="mb-0 align-self-center"> <strong>
-                    {(Array.isArray(data.author) && data.author.length > 1) ? 'Authors : ' : 'Author'}
+                    {(Array.isArray(data.author) && data.author.length > 1) ? 'Auteurs : ' : 'Auteur'}
                   </strong> {Array.isArray(data.author) ? data.author.join(', ') : data.author}</Card.Text>
                   <Button
                     variant="danger"
@@ -77,7 +56,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
         className="mt-4 mb-5"
         size="md"
       >
-        You don't have any books in your library
+        "Vous n'avez aucun livre dans votre bibliothèque"
       </Button>
     );
 
@@ -88,7 +67,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
         className="mt-4 mb-5"
         onClick={() => deleteAllBooks()}
       >
-        Delete all books
+        Supprimer tous les livres
       </Button>
     </Col>
   );
@@ -97,7 +76,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
     <Container fluid>
       <Row>
         <Col className="text-center mt-5">
-          <h1 className="display-4">Add a book to your library</h1>
+          <h1 className="display-4">Ajouter un livre à ma bibliothèque</h1>
         </Col>
       </Row>
       <Form className="d-flex justify-content-center mt-5" onSubmit={handleSubmit}>
@@ -107,7 +86,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
               <Form.Control
                 value={newData.title}
                 type="text"
-                placeholder="Title"
+                placeholder="Titre"
                 required
                 onChange={(e) =>
                   setNewData({ ...newData, title: e.target.value })
@@ -120,7 +99,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
               <Form.Control
                 value={newData.author}
                 type="text"
-                placeholder="Author"
+                placeholder="Auteur"
                 required
                 onChange={(e) =>
                   setNewData({ ...newData, author: e.target.value })
@@ -128,10 +107,10 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
               />
             </Form.Group>
           </Col>
-          <Col xs={12} md={4} className="d-flex justify-content-end">
+          <Col xs={12} md={4} className="mb-3">
             <Form.Group className="mb-3" controlId="formBasicButton">
               <Button variant="outline-secondary" type="submit">
-                Add a book
+                Ajouter
               </Button>
             </Form.Group>
           </Col>
@@ -139,7 +118,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
       </Form>
       <Row className="mt-5">
         <Col className="text-center">
-          <h2>My library</h2>
+          <h2>Ma Liste</h2>
         </Col>
       </Row>
       <Row className="mt-3">{displayData}</Row>
@@ -148,14 +127,14 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAllBooks }) => {
   );
 };
 
-// access redux state (store)
+// accéder à l'état redux et récupérer les props libraryData
 const addStateToProps = (state) => {
   return {
     libraryData: state.library,
   };
 };
 
-// access the dispatch and retrieve the addBook props
+// dispatch permet d'envoyer une action à redux
 const addDispatchToProps = (dispatch) => {
   return {
     addBook: (param) => dispatch(addBook(param)),

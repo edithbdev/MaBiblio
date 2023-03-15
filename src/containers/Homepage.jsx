@@ -8,7 +8,7 @@ const Homepage = () => {
     <Container fluid>
       <Row>
         <Col className="text-center mt-5">
-          <h1 className="display-4">My Library Books</h1>
+          <h1 className="display-4">Ma Biblio</h1>
         </Col>
       </Row>
       <Row className="d-flex flex-column justify-content-center mt-3">
@@ -20,9 +20,9 @@ const Homepage = () => {
             variant="outline-secondary"
             size="lg"
             as={Link}
-            to="/MyLibrary"
+            to="/Ma-liste"
           >
-            View my books
+            Voir ma bibliothèque
           </Button>
         </Col>
       </Row>

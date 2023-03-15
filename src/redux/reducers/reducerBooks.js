@@ -2,7 +2,7 @@ import { ADD_BOOKS, DELETE_BOOK, DELETE_ALL_BOOKS } from '../constants';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
-  // I store in the array the recorded books
+  // Je stocke mes données dans un tableau
   books: [],
 };
 
@@ -22,17 +22,17 @@ const removeDatabyId = (state, id) => {
 
 //reducer
 const reducerBooks = (state = initialState.books, action) => {
-  // I check what we have at the localStorage level
+  // Je vérifie si j'ai des données dans localStorage
   if (localStorage.getItem('booksData')) {
-    // I rewrite the state in JSON format
+    // j'initialise mon state avec les données de localStorage
     state = JSON.parse(localStorage.getItem('booksData'));
   }
   switch (action.type) {
     case ADD_BOOKS:
-      // new state
+      // nouveau state
       state = [...state, helperAddData(action)];
-      // saved a copy in localStorage
-      // and convert it to a string
+      // sauvegarder le state dans localStorage
+      // et le convertir en string
       localStorage.setItem('booksData', JSON.stringify(state));
       return state;
 

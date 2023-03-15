@@ -7,11 +7,10 @@ const Footer = () => {
       className="text-center fixed-bottom bg-dark">
       <Card.Footer>
         <small className="text-muted">
-          MY LIBRARY BOOKS &nbsp;
+          MA BIBLIO &nbsp;
           <a href="https://github.com/edithbdev" target="_blank" rel="noreferrer">
             &copy;  Edithbdev
           </a>
-
         </small>
       </Card.Footer>
     </Card>

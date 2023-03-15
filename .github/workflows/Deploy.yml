@@ -1,4 +1,4 @@
-name: Github Pages deploy
+name: Github-Pages-deploy
 
 on:
   # Trigger the workflow every time you push to the `main` branch

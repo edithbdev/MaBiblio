@@ -10,12 +10,12 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename="/MyLibraryBooks-redux">
+    <Router basename="/MaBiblio">
       <NavBar />
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route path="/myLibrary" component={AddBooks} />
-        <Route path="/search" component={SearchBooks} />
+        <Route path="/ma-liste" component={AddBooks} />
+        <Route path="/rechercher" component={SearchBooks} />
         <Route path='*' component={PageNotFound} />
       </Switch>
       <Footer />

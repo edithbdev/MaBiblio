@@ -7,8 +7,8 @@ const PageNotFound = () => {
         <Container fluid>
             <Row>
                 <Col className="text-center mt-5">
-                    <h1 className="display-4">SORRY</h1>
-                    <h2>we couldn't find that page</h2>
+                    <h1 className="display-4">Désolé</h1>
+                    <h2>La page que vous recherchez n'existe pas</h2>
                 </Col>
             </Row>
             <Row className="d-flex flex-column justify-content-center mt-3">
@@ -22,7 +22,7 @@ const PageNotFound = () => {
                         as={Link}
                         to="/"
                     >
-                        Go to Homepage
+                        Retour à l'accueil
                     </Button>
                 </Col>
             </Row>

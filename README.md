@@ -1,47 +1,51 @@
-# MyLibraryBooks-redux 📚 
+# Ma Biblio - redux 📚 
 
-## Table of Contents
+![Capture d'écran du site](screenshot.jpg)
 
-- [Getting Started](#getting-started)
-- [Objective of the project](#objective-of-the-project)
-- [Clone the repository](#clone-the-repository)
-- [Install dependencies](#install-dependencies)
-- [Available Scripts](#available-scripts)
-- [See the project](#see-the-project)
+## Objectif du projet
+✨ Ici le projet ne fait pas appel à une base de données. Pour stocker les informations de l'utilisateur, j'utilise le localstorage.
+L'objectif de ce projet était d'utiliser la librairie Redux et l'API Google ✨
 
-## Getting Started
+## Technologies utilisées
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [React](https://fr.reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Google Books API](https://developers.google.com/books)
+- [Bootstrap](https://getbootstrap.com/)
+- [Github Pages](https://pages.github.com/)
 
-## Objective of the project
-✨ Here the project does not use a database. To store user information, I use localstorage.
-The objective of this project is to use the Redux library and the Google API ✨
+## Fonctionnalités
 
-## Clone the repository
+- [x] Recherche de livres par mot clé (titre, auteur, etc.)
+- [x] Api Google Books
+- [x] Affichage des résultats de la recherche
+- [x] Ajout de livres à sa bibliothèque
+- [x] Suppression de livres de sa bibliothèque
+- [x] Affichage des livres de sa bibliothèque
+- [x] Affichage des détails d'un livre
+- [x] Données stockées dans le localstorage
+
+## Installation
 
 ```bash
-git clone https://github.com/edithbdev/MyLibraryBooks-redux.git
-```
-
-## Install dependencies
-
-```bash
+git clone
 npm install
 ```
 
-## Available Scripts
+## Lancement
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-## See the project
 ```bash
-https://edithbdev.github.io/MyLibraryBooks-redux/
+npm start
 ```
+Ouvrez [http://localhost:3000](http://localhost:3000) pour voir le projet dans votre navigateur.
+
+## Déploiement
+Le déploiement est automatique sur Github Pages à chaque push sur la branche `main`.
+
+```bash
+npm run build
+```
+
+## Auteur
+
+👤 **Edith B** - [https://edithbdev.github.io/MaBiblio/](https://edithbdev.github.io/MaBiblio/)

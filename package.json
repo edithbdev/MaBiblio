@@ -1,9 +1,10 @@
 {
   "name": "books",
   "version": "0.1.0",
-  "homepage": "https://edithbdev.github.io/MyLibraryBooks-redux",
+  "homepage": "https://edithbdev.github.io/MaBiblio",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

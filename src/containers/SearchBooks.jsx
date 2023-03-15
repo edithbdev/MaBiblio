@@ -18,7 +18,7 @@ const SearchBooks = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (keyword === '') {
-      toast.error('Please enter a keyword');
+      toast.error('Merci de saisir un mot clé');
       return;
     }
     dispatch(fetchBooks(keyword));
@@ -36,18 +36,18 @@ const SearchBooks = () => {
       author,
     };
     dispatch(addBook(bookToSave));
-    toast.success('Registered book !');
+    toast.success('Livre ajouté à la bibliothèque');
   };
 
   const displayFetchBooks = stateSearch.isLoading ? (
     <Col className="d-flex justify-content-center">
       <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
+        <span className="visually-hidden">Chargement...</span>
       </Spinner>
     </Col>
   ) : stateSearch.fetchBooks === undefined ? (
     <Col className="d-flex justify-content-center text-danger">
-      No books found
+      Aucun livre trouvé
     </Col>
   ) : stateSearch.error !== '' ? (
     <Col className="d-flex justify-content-center text-danger">{stateSearch.error}</Col>
@@ -67,12 +67,12 @@ const SearchBooks = () => {
                     <Card.Img style={{ width: 'auto', marginBottom: '1rem' }} variant="top" src={data.volumeInfo.imageLinks.thumbnail} alt={data.volumeInfo.title} />
                   )}
                   <br />
-                  <Card.Title>Title : {data.volumeInfo.title}</Card.Title>
+                  <Card.Title>Titre : {data.volumeInfo.title}</Card.Title>
                   {data.volumeInfo.authors && (
                     data.volumeInfo.authors.length === 1 ?
-                      <Card.Text>Author : {data.volumeInfo.authors}</Card.Text>
+                      <Card.Text>Auteur : {data.volumeInfo.authors}</Card.Text>
                       :
-                      <Card.Text>Authors : {data.volumeInfo.authors.join(', ')}</Card.Text>
+                      <Card.Text>Auteurs : {data.volumeInfo.authors.join(', ')}</Card.Text>
                   )}
                   {data.volumeInfo.hasOwnProperty('description') && (
                     <Card.Text>
@@ -87,11 +87,11 @@ const SearchBooks = () => {
                         rel="noopener noreferrer"
                         href={data.saleInfo.buyLink}
                       >
-                        E-book available
+                        E-book disponible
                         {data.saleInfo.hasOwnProperty('saleability') && (
                           data.saleInfo.saleability === 'FREE' ?
-                            <Badge className="mx-1" bg="warning"> Free </Badge>
-                            : <Badge className="mx-1" bg="primary"> Paying </Badge>
+                            <Badge className="mx-1" bg="warning"> gratuit </Badge>
+                            : <Badge className="mx-1" bg="primary"> payant </Badge>
                         )}
                       </Card.Link>
                     ))}
@@ -101,7 +101,7 @@ const SearchBooks = () => {
                     rel="noopener noreferrer"
                     href={data.volumeInfo.previewLink}
                   >
-                    More informations
+                    En savoir plus
                   </Card.Link>
                   {
                     !stateBooks.filter((book) => book.title === data.volumeInfo.title).length > 0 ?
@@ -109,11 +109,11 @@ const SearchBooks = () => {
                         variant="secondary"
                         type='submit'
                         onClick={() => handleSaveBook(data.volumeInfo.title, data.volumeInfo.authors)}>
-                        Save
+                        Ajouter à ma liste
                       </Button>
                       :
                       <Button variant="warning" disabled>
-                        Book registered
+                        Livre ajouté à ma liste
                       </Button>
                   }
                 </Accordion.Body>
@@ -129,9 +129,9 @@ const SearchBooks = () => {
     <Container fluid>
       <Row>
         <Col className="text-center mt-5">
-          <h1 className="display-4">SEARCH FOR A BOOK</h1>
+          <h1 className="display-4">Rechercher un livre</h1>
           <p>
-            Search for a book on the Google API by keyword, and add it to your library!
+            Recherchez un livre sur l'API Google par mot-clé, et ajoutez-le à votre liste !
           </p>
         </Col>
       </Row>
@@ -145,14 +145,14 @@ const SearchBooks = () => {
               <Form.Control
                 value={keyword}
                 type="text"
-                placeholder="What to look for ?"
+                placeholder="Que recherchez-vous ?"
                 onChange={(e) => setKeyword(e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicButton">
               <Button variant="outline-secondary" type="submit">
-                Search
+                Rechercher
               </Button>
             </Form.Group>
           </Form>
